@@ -26,32 +26,23 @@ circ:: node* circ::createNode(int x)
     node * n = new node;
     n -> x = x;
     n->next = NULL;
-    //n->next = n;
     return n;
 }
 
 void circ::addNode(int x)
 {
     if (root == NULL){
-        //root = createNode(x);
-        //root->next = root;
-        root = new node;
-        root->x = x;
+        root = createNode(x);
         root->next = root;
         cout<<"root "<<&root<<" "<<root->x<<endl;
     }
     else{
         if(root->next == root){
-            root->next = new node;
-            node * temp = root;
-            temp = temp->next;
-            temp ->x = x;
-            //root->next = temp;
-            temp->next = root;
+            root->next = createNode(x);
+            root->next->next = root;
             cout<<"else "<<root->next->x<<endl;
         }
         else if(root->next !=root){
-            //node * cond = root;
             node * traverse = root;
             while(traverse->next!=root){
                 cout<<"while"<<endl;
