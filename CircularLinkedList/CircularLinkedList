@@ -1,0 +1,92 @@
+#include <iostream>
+
+using namespace std;
+
+class circ{
+
+public:
+    struct node{
+    int x;
+    node * next;
+};
+    node * root;
+    circ();
+    void addNode(int x);
+    node * createNode(int x);
+    void printlist();
+
+};
+
+circ::circ(){
+root = NULL;
+}
+
+circ:: node* circ::createNode(int x)
+{
+    node * n = new node;
+    n -> x = x;
+    n->next = NULL;
+    //n->next = n;
+    return n;
+}
+
+void circ::addNode(int x)
+{
+    if (root == NULL){
+        //root = createNode(x);
+        //root->next = root;
+        root = new node;
+        root->x = x;
+        root->next = root;
+        cout<<"root "<<&root<<" "<<root->x<<endl;
+    }
+    else{
+        if(root->next == root){
+            root->next = new node;
+            node * temp = root;
+            temp = temp->next;
+            temp ->x = x;
+            //root->next = temp;
+            temp->next = root;
+            cout<<"else "<<root->next->x<<endl;
+        }
+        else if(root->next !=root){
+            //node * cond = root;
+            node * traverse = root;
+            while(traverse->next!=root){
+                cout<<"while"<<endl;
+                traverse = traverse->next;
+            }
+            traverse->next = createNode(x);
+            traverse = traverse->next;
+            traverse->next = root;
+        }
+    }
+}
+
+void circ::printlist(){
+    node * p = root;
+
+    while(p->next!=root)
+    {
+        cout<<p->x<<endl;
+        p = p->next;
+    }
+}
+
+int main()
+{
+    circ c;
+    c.addNode(10);
+    c.addNode(15);
+    c.addNode(20);
+    c.addNode(25);
+    c.addNode(30);
+    c.addNode(35);
+    c.addNode(40);
+    c.addNode(45);
+    c.addNode(50);
+    c.addNode(55);
+    c.printlist();
+    return 0;
+}
